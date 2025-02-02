@@ -7,7 +7,6 @@ public class PracticeFormTest extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
 
-
     @Test
     void fillFormTest() {
         registrationPage.openPage()
@@ -21,7 +20,7 @@ public class PracticeFormTest extends TestBase {
                 .setSubject("Chemistry")
                 .setSubject("Arts")
                 .chooseHobbies("Music")
-                .uploadFile("picture.jpg")
+                .uploadFile("picture1.jpg")
                 .setAddress("г. Москва, ул. Ленина, д. 10")
                 .setState("Haryana")
                 .setCity("Panipat")
@@ -34,7 +33,7 @@ public class PracticeFormTest extends TestBase {
                 .checkResult("Date of Birth", "17 June,1999")
                 .checkResult("Subjects", "Chemistry, Arts")
                 .checkResult("Hobbies", "Music")
-                .checkResult("Picture", "picture.jpg")
+                .checkResult("Picture", "picture1.jpg")
                 .checkResult("Address", "г. Москва, ул. Ленина, д. 10")
                 .checkResult("State and City", "Haryana Panipat")
                 .closeModalWindow()

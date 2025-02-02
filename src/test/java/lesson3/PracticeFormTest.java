@@ -33,7 +33,7 @@ public class PracticeFormTest {
         $("#subjectsInput").setValue("Chemistry").pressEnter();
         $("#subjectsInput").setValue("Arts").pressEnter();
         $("#hobbiesWrapper").$(byText("Music")).click();
-        $("#uploadPicture").uploadFromClasspath("picture.jpg");
+        $("#uploadPicture").uploadFromClasspath("picture1.jpg");
         $("#currentAddress").setValue("г. Москва, ул. Ленина, д. 10");
         $("#react-select-3-input").setValue("Haryana").pressEnter(); //State
         $("#react-select-4-input").setValue("Panipat").pressEnter(); //City
@@ -46,7 +46,7 @@ public class PracticeFormTest {
         $(".table").$(byText("Date of Birth")).parent().shouldHave(text("17 June,1999"));
         $(".table").$(byText("Subjects")).parent().shouldHave(text("Chemistry, Arts"));
         $(".table").$(byText("Hobbies")).parent().shouldHave(text("Music"));
-        $(".table").$(byText("Picture")).parent().shouldHave(text("picture.jpg"));
+        $(".table").$(byText("Picture")).parent().shouldHave(text("picture1.jpg"));
         $(".table").$(byText("Address")).parent().shouldHave(text("г. Москва, ул. Ленина, д. 10"));
         $(".table").$(byText("State and City")).parent().shouldHave(text("Haryana Panipat"));
     }
