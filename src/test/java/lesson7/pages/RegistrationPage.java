@@ -28,8 +28,8 @@ public class RegistrationPage {
             closeRegistrationConfirmationWindow = $("#closeLargeModal"),
             modalWindow = $(".modal-title.h4");
 
-    CalendarComponent calendarComponent = new CalendarComponent();
-    ResultTableComponent resultTableComponent = new ResultTableComponent();
+    private final CalendarComponent calendarComponent = new CalendarComponent();
+    private final ResultTableComponent resultTableComponent = new ResultTableComponent();
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -46,106 +46,103 @@ public class RegistrationPage {
 
     public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
-
         return this;
     }
 
     public RegistrationPage setLastName(String value) {
         lastNameInput.setValue(value);
-
         return this;
     }
 
     public RegistrationPage setEmail(String value) {
         userEmailInput.setValue(value);
-
         return this;
     }
 
     public RegistrationPage chooseGender(String value) {
         genderWrapper.$(byText(value)).click();
-
         return this;
     }
 
-    public RegistrationPage setNumber(String value) {
+    public RegistrationPage setPhoneNumber(String value) {
         userNumber.setValue(value);
-
         return this;
     }
 
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
         dayOfBirthInput.click();
         calendarComponent.setDate(day, month, year);
-
         return this;
     }
 
-    public RegistrationPage setSubject(String value) {
-        subjectInput.setValue(value).pressEnter();
-
+    public RegistrationPage setSubject(String subject) {
+        subjectInput.setValue(subject).pressEnter();
         return this;
     }
 
-    public RegistrationPage chooseHobbies(String value) {
+    public RegistrationPage setSubjects(java.util.List<String> subjects) {
+        for (String subject : subjects) {
+            setSubject(subject);
+        }
+        return this;
+    }
+
+    public RegistrationPage chooseHobby(String value) {
         hobbiesWrapper.$(byText(value)).click();
+        return this;
+    }
 
+    public RegistrationPage chooseHobbies(java.util.List<String> hobbies) {
+        for (String hobby : hobbies) {
+            hobbiesWrapper.$(byText(hobby)).click();
+        }
         return this;
     }
 
     public RegistrationPage uploadFile(String filePath) {
         uploadPicture.uploadFromClasspath(filePath);
-
         return this;
     }
 
     public RegistrationPage setAddress(String value) {
         currentAddress.setValue(value);
-
         return this;
     }
 
     public RegistrationPage setState(String value) {
         stateList.click();
         stateFieldSetValue.setValue(value).pressEnter();
-
         return this;
     }
 
     public RegistrationPage setCity(String value) {
         cityList.click();
         cityFieldSetValue.setValue(value).pressEnter();
-
         return this;
     }
 
     public RegistrationPage submitRegistration() {
         submitButton.click();
-
         return this;
     }
 
     public RegistrationPage closeModalWindow() {
         closeRegistrationConfirmationWindow.click();
-
         return this;
     }
 
     public RegistrationPage modalWindowShouldExist() {
         modalWindow.should(exist);
-
         return this;
     }
 
     public RegistrationPage modalWindowShouldNotExist() {
         modalWindow.shouldNot(exist);
-
         return this;
     }
 
     public RegistrationPage checkResult(String key, String value) {
         resultTableComponent.checkResult(key, value);
-
         return this;
     }
 }

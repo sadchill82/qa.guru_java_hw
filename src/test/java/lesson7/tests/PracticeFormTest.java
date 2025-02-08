@@ -1,72 +1,77 @@
 package lesson7.tests;
 
+import lesson7.models.StudentData;
 import lesson7.pages.RegistrationPage;
-import lesson7.utils.RandomUtils;
+import lesson7.utils.StudentDataFactory;
 import org.junit.jupiter.api.Test;
 
 public class PracticeFormTest extends TestBase {
 
-    RandomUtils testData = new RandomUtils();
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void fillFormTest() {
+        StudentData testData = StudentDataFactory.generateFullStudentData();
+
         registrationPage.openPage()
                 .removeBanners()
-                .setFirstName(testData.firstName)
-                .setLastName(testData.lastName)
-                .setEmail(testData.email)
-                .chooseGender(testData.gender)
-                .setNumber(testData.number)
-                .setDateOfBirth(testData.day, testData.month, testData.year)
-                .setSubject(testData.subject)
-                .chooseHobbies(testData.hobbies)
-                .uploadFile(testData.picture)
-                .setAddress(testData.currentAddress)
-                .setState(testData.state)
-                .setCity(testData.city)
+                .setFirstName(testData.getFirstName())
+                .setLastName(testData.getLastName())
+                .setEmail(testData.getEmail())
+                .chooseGender(testData.getGender())
+                .setPhoneNumber(testData.getPhoneNumber())
+                .setDateOfBirth(testData.getDay(), testData.getMonth(), testData.getYear())
+                .setSubjects(testData.getSubjects())
+                .chooseHobbies(testData.getHobbies())
+                .uploadFile(testData.getPicture())
+                .setAddress(testData.getAddress())
+                .setState(testData.getState())
+                .setCity(testData.getCity())
                 .submitRegistration()
                 .modalWindowShouldExist()
-                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
-                .checkResult("Student Email", testData.email)
-                .checkResult("Gender", testData.gender)
-                .checkResult("Mobile", testData.number)
-                .checkResult("Date of Birth", testData.day + " " + testData.month + "," + testData.year)
-                .checkResult("Subjects", testData.subject)
-                .checkResult("Hobbies", testData.hobbies)
-                .checkResult("Picture", testData.picture)
-                .checkResult("Address", testData.currentAddress)
-                .checkResult("State and City", testData.state + " " + testData.city)
+
+                .checkResult("Student Name", testData.getFirstName() + " " + testData.getLastName())
+                .checkResult("Student Email", testData.getEmail())
+                .checkResult("Gender", testData.getGender())
+                .checkResult("Mobile", testData.getPhoneNumber())
+                .checkResult("Date of Birth", testData.getDay() + " " + testData.getMonth() + "," + testData.getYear())
+                .checkResult("Subjects", String.join(", ", testData.getSubjects()))
+                .checkResult("Hobbies", String.join(", ", testData.getHobbies()))
+                .checkResult("Picture", testData.getPicture())
+                .checkResult("Address", testData.getAddress())
+                .checkResult("State and City", testData.getState() + " " + testData.getCity())
                 .closeModalWindow()
                 .modalWindowShouldNotExist();
     }
 
     @Test
     void fillOnlyNecessaryFormTest() {
+        StudentData testData = StudentDataFactory.generateMinimalStudentData();
+
         registrationPage.openPage()
                 .removeBanners()
-                .setFirstName(testData.firstName)
-                .setLastName(testData.lastName)
-                .chooseGender(testData.gender)
-                .setNumber(testData.number)
-                .setDateOfBirth(testData.day, testData.month, testData.year)
+                .setFirstName(testData.getFirstName())
+                .setLastName(testData.getLastName())
+                .chooseGender(testData.getGender())
+                .setPhoneNumber(testData.getPhoneNumber())
+                .setDateOfBirth(testData.getDay(), testData.getMonth(), testData.getYear())
                 .submitRegistration()
                 .modalWindowShouldExist()
-                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
-                .checkResult("Gender", testData.gender)
-                .checkResult("Date of Birth", testData.day + " " + testData.month + "," + testData.year)
+                .checkResult("Student Name", testData.getFirstName() + " " + testData.getLastName())
+                .checkResult("Gender", testData.getGender())
+                .checkResult("Date of Birth", testData.getDay() + " " + testData.getMonth() + "," + testData.getYear())
                 .closeModalWindow()
                 .modalWindowShouldNotExist();
     }
 
     @Test
     void fillOnlyFirstNameFormTest() {
+        StudentData testData = StudentDataFactory.generateFirstNameOnlyData();
+
         registrationPage.openPage()
                 .removeBanners()
-                .setFirstName(testData.firstName)
+                .setFirstName(testData.getFirstName())
                 .submitRegistration()
                 .modalWindowShouldNotExist();
     }
-
-
 }
